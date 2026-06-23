@@ -1,0 +1,74 @@
+
+lsft_sqt: lsft_sqt {
+        label = "lsft_sqt";
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&kp LSFT>, <&kp SQT>;
+        mods = <(MOD_RSFT)>;
+};
+
+rsft_dqt: rsft_dqt {
+        label = "rsft_sqt";
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&kp RSFT>, <&kp DQT>;
+        mods = <(MOD_LSFT)>;
+};        
+
+grave_tilde: grave_tilde {
+        label = "grave_tilde";
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&kp GRAVE>, <&kp TILDE>;
+        mods = <(MOD_RSFT)>;
+};
+
+/* Similar to mo_fast_hold but pairs with CTRL/SHIFTS like keys
+   instead of layers */
+kp_fast_hold: kp_fast_hold {
+        label = "kp_fast_hold";
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        quick-tap-ms = <200>;       
+        flavor = "hold-preferred";
+        tapping-term-ms = <200>;
+        bindings = <&kp>, <&kp>;
+};
+
+/*  Assuming slow key, rolling will hold.  If you want the key
+    press you will release it assertively before next press.
+    This is good for ESC/TAB/ENTER key, with fast layers. */
+mo_fast_hold: mo_fast_hold {
+        label = "mo_fast_hold";
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        quick-tap-ms = <200>;       
+        flavor = "hold-preferred";
+        tapping-term-ms = <200>;
+        bindings = <&mo>, <&kp>;
+};
+
+/* Similar to kp_slow_hold but pairs with Layers instead keys */
+mo_slow_hold: mo_slow_hold {
+        label = "mo_slow_hold";
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        quick-tap-ms = <200>;       
+        flavor = "tap-preferred";
+        tapping-term-ms = <250>;
+        bindings = <&mo>, <&kp>;
+};
+
+/*  Assuming a fast key, rolling taps. If you want hold you will
+    be explicit. This is good for SPACE bar which will roll 
+    a lot. But not good to pair with a layer */
+kp_slow_hold: kp_slow_hold {
+        label = "kp_slow_hold";
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        quick-tap-ms = <200>;       
+        flavor = "tap-preferred";
+        tapping-term-ms = <250>;
+        bindings = <&kp>, <&kp>;
+};
+         
