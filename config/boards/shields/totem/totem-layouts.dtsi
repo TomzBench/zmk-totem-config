@@ -5,6 +5,7 @@ totem_layout: totem_layout{
     compatible = "zmk,physical-layout";
     display-name = "TOTEM Keyboard Layout";
     transform = <&default_transform>;
+    kscan = <&kscan0>;
     keys  //                     w   h    x    y     rot    rx    ry
     = <&key_physical_attrs 100 100   70  136 (-1000)   120   186>
     , <&key_physical_attrs 100 100  176   54  (-400)   226   104>

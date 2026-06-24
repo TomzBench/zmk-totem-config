@@ -9,7 +9,10 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
+        /* No zmk,matrix_transform: ZMK Studio requires the transform to come
+           from the physical layout (totem_layout) instead. Keeping a chosen
+           matrix_transform makes USE_PHY_LAYOUTS false and fails the build. */
+        zmk,physical-layout = &totem_layout;
     };
 
     default_transform: keymap_transform_0 {
@@ -33,7 +36,7 @@
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         wakeup-source;
-        diode-direction = "col2row"; 
+        diode-direction = "col2row";
         row-gpios
             = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
@@ -42,3 +45,7 @@
             ;
     };
 };
+
+/* Physical layout — required by ZMK Studio. Ships with the shield but is
+   otherwise unused; references &default_transform defined above. */
+#include "totem-layouts.dtsi"
