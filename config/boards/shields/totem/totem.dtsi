@@ -9,7 +9,9 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
+        /* No zmk,matrix_transform: ZMK Studio requires the transform to come
+           from the physical layout (totem_layout) instead. Keeping a chosen
+           matrix_transform makes USE_PHY_LAYOUTS false and fails the build. */
         zmk,physical-layout = &totem_layout;
     };
 
