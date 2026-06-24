@@ -55,7 +55,7 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        /* hold NUM + SYM (both inner thumbs) -> SYS */
+        /* hold NUM + SYM (squeeze both middle thumbs) -> SYS */
         tri_sys {
             if-layers = <NUM SYM>;
             then-layer = <SYS>;
@@ -70,8 +70,9 @@
          * │  Q    W    E    R    T       │ │       Y    U    I    O    P  │
          * │  A    S    D    F    G       │ │       H    J    K    L    ;  │
          * │ '"⇧ Z⌥  X    C    V    B     │ │     N    M    ,    .  /⌥ "'⇧ │
-         * ╰──────────╮ GUI  CTL  SYM     │ │     NUM  CTL  GUI ╭──────────╯
-         *            ╰ /esc /spc /tab    │ │     /bsp /ent /del╯
+         * ╰──────────╮ GUI  SYM  CTL     │ │     CTL  NUM  GUI ╭──────────╯
+         *            ╰ /esc /tab /spc    │ │     /ent /bsp /del╯
+         *   (SYS = squeeze both middle thumbs: SYM + NUM)
          */
         base_layer {
             display-name = "BASE";
@@ -79,19 +80,19 @@
   &kp Q       &kp W        &kp E    &kp R    &kp T          &kp Y    &kp U    &kp I      &kp O    &kp P
   &kp A       &kp S        &kp D    &kp F    &kp G          &kp H    &kp J    &kp K      &kp L    &kp SEMI
   &lsft_sqt &pmt LALT Z &kp X &kp C &kp V &kp B            &kp N &kp M &kp COMMA &kp DOT &pmt RALT FSLH &rsft_dqt
-                          LGUI_ESC LCTRL_SPACE SYM_TAB      NUM_BSPC RCTRL_ENTER RGUI_DEL
+                          LGUI_ESC SYM_TAB LCTRL_SPACE      RCTRL_ENTER NUM_BSPC RGUI_DEL
             >;
         };
 
         /*
-         * NUM — hold right inner thumb. Numbers on the LEFT hand, mods +
-         *       arrows on the RIGHT (so Ctrl+2 etc. work; arrows sit under
-         *       the home row). [ ] on the left thumbs.
+         * NUM — hold right-MIDDLE thumb. Numbers LEFT, mods+arrows RIGHT
+         *       (Ctrl+2 etc. work; arrows under the home row). [ ] on the
+         *       left middle+center; the middle also holds SYM (tap-pref) -> SYS.
          * ╭─────────────────────────────╮ ╭─────────────────────────────╮
          * │  +    7    8    9    0       │ │                             │
          * │  -    1    2    3    =       │ │       :   GUI  CTL  ALT      │
          * │      *    4    5    6    \   │ │         ←    ↓    ↑    →      │
-         * ╰──────────╮  [    ]          │ │     (num)        ╭──────────╯
+         * ╰──────────╮  ·  [⇧SYM ]      │ │    (num)         ╭──────────╯
          */
         num_layer {
             display-name = "NUM";
@@ -99,18 +100,19 @@
   &kp PLUS    &kp N7       &kp N8   &kp N9   &kp N0         &trans     &trans   &trans    &trans    &trans
   &kp MINUS   &kp N1       &kp N2   &kp N3   &kp EQUAL      &kp COLON  &kp RGUI &kp RCTRL &kp RALT  &trans
   &trans  &kp ASTRK &kp N4 &kp N5 &kp N6 &kp BSLH          &trans  &kp LEFT &kp DOWN &kp UP &kp RIGHT  &trans
-                          &kp LBKT &kp RBKT &trans          &trans     &trans   &trans
+                          &trans &mo_slow_hold SYM LBKT &kp RBKT          &trans &trans &trans
             >;
         };
 
         /*
-         * SYM — hold left inner thumb. Symbols on the RIGHT hand, left hand
-         *       transparent (the hold hand). { } on the right thumbs.
+         * SYM — hold left-MIDDLE thumb. Symbols on the RIGHT hand, left
+         *       transparent. { } on the right center+middle; the middle
+         *       also holds NUM (tap-pref) -> SYS.
          * ╭─────────────────────────────╮ ╭─────────────────────────────╮
          * │                             │ │   ~    &    *    (    )      │
          * │                             │ │   _    !    @    #    +      │
          * │                             │ │     `    $    %    ^    |    │
-         * ╰──────────╮      (sym)       │ │              {    } ╭───────╯
+         * ╰──────────╮      (sym)       │ │       {  ]⇧NUM ·  ╭────────╯
          */
         sym_layer {
             display-name = "SYM";
@@ -118,7 +120,7 @@
   &trans      &trans       &trans   &trans   &trans         &kp TILDE  &kp AMPS   &kp ASTRK   &kp LPAR  &kp RPAR
   &trans      &trans       &trans   &trans   &trans         &kp UNDER  &kp EXCL   &kp AT      &kp HASH  &kp PLUS
   &trans  &trans &trans &trans &trans &trans               &kp GRAVE &kp DOLLAR &kp PERCENT &kp CARET &kp PIPE  &trans
-                          &trans   &trans   &trans          &trans     &kp LBRC   &kp RBRC
+                          &trans &trans &trans          &kp LBRC &mo_slow_hold NUM RBRC &trans
             >;
         };
 
