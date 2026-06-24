@@ -19,6 +19,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
 #define BASE 0
@@ -122,20 +123,20 @@
         };
 
         /*
-         * SYS — hold NUM + SYM together. F-keys on the LEFT, mirroring the
-         *       digit positions (F1 where 1 is...). BT + bootloader on RIGHT.
+         * SYS — hold NUM + SYM together. F-keys on the LEFT (mirroring the
+         *       NUM digits). System/BT on the RIGHT.
          * ╭─────────────────────────────╮ ╭─────────────────────────────╮
-         * │ F11   F7   F8   F9  F10      │ │  BOOT                       │
+         * │ F11   F7   F8   F9  F10      │ │ BOOT OUTtog STUDIO          │
          * │ F12   F1   F2   F3           │ │ BTclr BT0  BT1  BT2  BT3     │
-         * │      F4   F5   F6            │ │     BT4 BTnxt               │
+         * │      F4   F5   F6            │ │   BT4 BTnxt BTclrA          │
          * ╰──────────╮                   │ │                  ╭──────────╯
          */
         sys_layer {
             display-name = "SYS";
             bindings = <
-  &kp F11     &kp F7       &kp F8   &kp F9   &kp F10        &bootloader &trans     &trans     &trans     &trans
+  &kp F11     &kp F7       &kp F8   &kp F9   &kp F10        &bootloader &out OUT_TOG &studio_unlock &trans &trans
   &kp F12     &kp F1       &kp F2   &kp F3   &trans         &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
-  &trans  &trans &kp F4 &kp F5 &kp F6 &trans               &bt BT_SEL 4 &bt BT_NXT &trans &trans &trans  &trans
+  &trans  &trans &kp F4 &kp F5 &kp F6 &trans               &bt BT_SEL 4 &bt BT_NXT &bt BT_CLR_ALL &trans &trans  &trans
                           &trans   &trans   &trans          &trans     &trans     &trans
             >;
         };

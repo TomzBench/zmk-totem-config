@@ -33,7 +33,7 @@
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
         wakeup-source;
-        diode-direction = "col2row"; 
+        diode-direction = "col2row";
         row-gpios
             = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
@@ -42,3 +42,7 @@
             ;
     };
 };
+
+/* Physical layout — required by ZMK Studio. Ships with the shield but is
+   otherwise unused; references &default_transform defined above. */
+#include "totem-layouts.dtsi"
